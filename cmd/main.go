@@ -5,12 +5,17 @@ import (
 
 	"github.com/idkOybek/todo-app"
 	"github.com/idkOybek/todo-app/pck/handler"
+	"github.com/idkOybek/todo-app/pck/repository"
+	"github.com/idkOybek/todo-app/pck/service"
 )
 
 func main() {
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handler := handler.NewHandler(services)
+
 	srv := new(todo.Server)
-	if err := srv.Run("8080", handlers.InitRoutes()); err != nil {
+	if err := srv.Run("8080", handler.InitRoutes()); err != nil {
 		log.Fatalf("error with init http server : %s", err.Error())
 	}
 }
