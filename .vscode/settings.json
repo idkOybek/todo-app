@@ -2,9 +2,12 @@
     "cSpell.words": [
         "dbname",
         "godotenv",
+        "gonic",
         "jmoiron",
         "joho",
+        "logrus",
         "Oybek",
+        "sirupsen",
         "sqlx",
         "sslmode"
     ]
