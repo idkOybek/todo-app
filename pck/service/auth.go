@@ -13,11 +13,7 @@ import (
 
 const (
 	salt       = "oewigjn213q34pojdsg"
-<<<<<<< HEAD
 	signingKey = "1203ptjogwneh;so"
-=======
-	signingKey = "pq32utjo32ptg"
->>>>>>> dcc634f (seventh video)
 	tokenTTL   = 12 * time.Hour
 )
 
@@ -52,10 +48,6 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 		},
 		user.Id,
 	})
-
-<<<<<<< HEAD
-	return token.SigningString()
-=======
 	return token.SignedString([]byte(signingKey))
 }
 
@@ -77,7 +69,6 @@ func (s *AuthService) ParseToken(accessToken string) (int, error) {
 	}
 
 	return claims.UserId, nil
->>>>>>> dcc634f (seventh video)
 }
 
 func (s *AuthService) generatePasswordHash(password string) string {
