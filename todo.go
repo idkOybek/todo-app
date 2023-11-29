@@ -28,7 +28,7 @@ type ListsItem struct {
 }
 
 type UpdateListInput struct {
-	Title       *string `json:"title`
+	Title       *string `json:"title"`
 	Description *string `json:"description"`
 }
 
