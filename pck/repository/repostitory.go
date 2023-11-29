@@ -18,15 +18,15 @@ type TodoList interface {
 	Update(userId, listId int, input todo.UpdateListInput) error
 }
 
-type TodoItems interface {
+type TodoItem interface {
 	Create(userId, listId int, item todo.TodoItem) (int, error)
-	GetAll(userId, listId int) ([]todo.TodoList, error)
+	GetAll(userId, listId int) ([]todo.TodoItem, error)
 }
 
 type Repository struct {
 	Authorization
 	TodoList
-	TodoItems
+	TodoItem
 }
 
 func NewRepository(db *sqlx.DB) *Repository {

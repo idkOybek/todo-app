@@ -6,11 +6,11 @@ import (
 )
 
 type TodoItemService struct {
-	repo     repository.TodoItems
+	repo     repository.TodoItem
 	listRepo repository.TodoList
 }
 
-func NewTodoItemService(repo repository.TodoItems, listRepo repository.TodoList) *TodoItemService {
+func NewTodoItemService(repo repository.TodoItem, listRepo repository.TodoList) *TodoItemService {
 	return &TodoItemService{repo: repo, listRepo: listRepo}
 }
 
@@ -23,6 +23,6 @@ func (s *TodoItemService) Create(userId, listId int, item todo.TodoItem) (int, e
 	return s.repo.Create(userId, listId, item)
 }
 
-func (s *TodoItemService) GetAll(userId, listId int) ([]todo.TodoList, error) {
+func (s *TodoItemService) GetAll(userId, listId int) ([]todo.TodoItem, error) {
 	return s.repo.GetAll(userId, listId)
 }

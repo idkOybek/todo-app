@@ -11,7 +11,7 @@ type TodoItemPostgres struct {
 	db *sqlx.DB
 }
 
-func NowTodoItemPostgres(db *sqlx.DB) *TodoItemPostgres {
+func NewTodoItemPostgres(db *sqlx.DB) *TodoItemPostgres {
 	return &TodoItemPostgres{db: db}
 }
 
@@ -40,11 +40,12 @@ func (r *TodoItemPostgres) Create(userId, listId int, item todo.TodoItem) (int, 
 	return itemId, tx.Commit()
 }
 
-func (r *TodoItemPostgres) GetAll(userId, listId int) ([]todo.TodoList, error) {
-	var item []todo.TodoItem
+func (r *TodoItemPostgres) GetAll(userId, listId int) ([]todo.TodoItem, error) {
+	var items []todo.TodoItem
 	query := fmt.Sprintf("SELECT * FROM %s INNER JOIN %s li on li.item_id = ti.id INNER JOIN %s ul on ul.list_id=li.list_id WHERE li.list_id = $1 AND ul.user_id = $2", todoItemsTable, listItemsTable, usersListsTable)
 
-	if err := r.db.Select(&item, query, listId, userId); err != nil {
+	if err := r.db.Select(&items, query, listId, userId); err != nil {
 		return nil, err
 	}
+	return items, nil
 }
